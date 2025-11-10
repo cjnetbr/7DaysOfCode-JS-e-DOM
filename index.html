@@ -1,33 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
     <title>Calendário de Aniverssário</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <main>
-        <h1>Cadastro de Pessoas</h1>
-        <form action="" class="form js-form">
-            <label for="name">Nome:
-                <input class="form-field js-field" type="text" name="name" required id="name" maxlength="120">
-            </label>
-            <label for="birth-date">
-                Data de nascimento:
-                <input class="form-field js-field" type="date" name="birth-date" required id="birth-date">
-            </label>
-            <div class="btn">
-                <button type="submit" class="submit" id="submit">Salvar</button>
-                <button class="clean" type="reset">Limpar</button>
-            </div>
-
-        </form>
+      <h1>Cadastro de Pessoas</h1>
+      <form action="" class="form js-form">
+        <label for="name"
+          >Nome:
+          <input
+            class="form-field js-field"
+            type="text"
+            name="name"
+            required
+            id="name"
+            maxlength="120"
+          />
+        </label>
+        <label for="birth-date">
+          Data de nascimento:
+          <input
+            class="form-field js-field"
+            type="text"
+            name="birth-date"
+            placeholder="Ex: 31/01/2021"
+            required
+            id="birth-date"
+          />
+        </label>
+        <div class="btn">
+          <button type="submit" class="submit" id="submit">Salvar</button>
+          <button class="clean" type="reset">Limpar</button>
+        </div>
+      </form>
+      <p class="msg js-msg"></p>
     </main>
 
     <script src="./script.js"></script>
-</body>
-
+  </body>
 </html>
