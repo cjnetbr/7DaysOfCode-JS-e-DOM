@@ -1,0 +1,88 @@
+.lista-cadastrados {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 1rem 1.5rem;
+}
+
+table {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+thead {
+  width: 100%;
+  display: flex;
+}
+
+thead tr {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 1rem;
+  background-color: #f2f2f2;
+  padding: 0.5rem 0;
+  border-radius: 0.5rem;
+  background-color: black;
+}
+
+thead th {
+  flex: 1;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #fff;
+}
+
+tbody {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+tbody tr {
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0.5rem 0;
+  /* border: 1px dashed #000; */
+}
+tbody td {
+  flex: 1;
+  text-align: center;
+  font-weight: 500;
+  font-size: 1.1rem;
+  color: #000;
+  font-style: italic;
+  border: 1px dashed #000;
+  padding: 1rem;
+}
+
+td .botoes {
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+.editar {
+  color: rgb(109, 196, 109);
+}
+
+.editar:hover {
+  color: green;
+}
+
+.deletar {
+  color: rgb(252, 175, 175);
+}
+
+.deletar:hover {
+  color: red;
+}

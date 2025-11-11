@@ -2,9 +2,19 @@
 // A função vinculada deverá pegar o valor informado nos campos nome e
 //  data de nascimento e imprimi-los no console.
 
-// Dessa forma, seu desafio de hoje será garantir um conjunto mínimo de validações para o seu formulário. Como ele representa uma pessoa, com nome e data de nascimento, as regras de negócio serão:
+//Day 3
+// - pegar os dados informados nos campos do mesmo para salvá-los localmente e exibi-los em uma tabela.
+// - Para fazer isso, você terá que adicionar um evento para ouvir a submissão do formulário, e esse evento coletará os valores informados em todos os campos do formulário e montará um objeto representando uma pessoa (com nome e data de nascimento).
+// - Com os dados em mãos, salve-os localmente de forma persistente, para não perdê-los.
+// - Por fim, leia os dados salvos localmente e exiba-os em uma tabela quando a página for recarregada ou fechada e reaberta.
 
-// Um nome precisa ter no mínimo três letras.
+let pessoas = getPessoasFromLocalStorage();
+
+function getPessoasFromLocalStorage() {
+  const pessoasSalvasJSON = localStorage.getItem("pessoas");
+  return pessoasSalvasJSON ? JSON.parse(pessoasSalvasJSON) : [];
+}
+console.log(pessoas);
 
 const btnSubmit = document.querySelector("#submit");
 
@@ -14,12 +24,11 @@ btnSubmit.addEventListener("click", (e) => {
   const form = document.querySelector(".js-form");
   const nome = document.querySelector("#name").value.trim();
   const dataNascimento = document.querySelector("#birth-date").value.trim();
-  const msg = document.querySelector(".js-msg");
+  const msg = document.querySelector(".msg");
 
-  // console.log("Nome:", nome);
-  // console.log("Data de Nascimento:", dataNascimento);
-
+  //validação do Formulário
   let erros = [];
+  //Day 2
   // Dessa forma, seu desafio de hoje será garantir um conjunto mínimo de validações para o seu formulário. Como ele representa uma pessoa, com nome e data de nascimento, as regras de negócio serão:
   // Um nome precisa ter no mínimo três letras.
   // Um nome pode ter no máximo 120 letras.
@@ -35,6 +44,8 @@ btnSubmit.addEventListener("click", (e) => {
     erros.push("O nome deve conter apenas letras.");
     console.log(nome);
   }
+
+  console.log(erros);
 
   // A data de nascimento precisa estar no formato DD/MM/AAAA, por exemplo: 31/01/2021.
   // O mês informado deve estar entre 01 e 12
@@ -65,9 +76,67 @@ btnSubmit.addEventListener("click", (e) => {
     msg.innerHTML = erros.join("<br>");
     msg.style.color = "red";
   } else {
-    msg.innerHTML = "Formulário enviado com sucesso! ✅";
-    msg.style.color = "green";
-    form.btnSubmit();
+    //persisteência dos dados (LOCALSTORAGE)
+
+    //criar um novo objeto Pessoa
+    const novaPessoaObj = {
+      id: Date.now(),
+      nome: nome,
+      dataNascimento: dataNascimento,
+    };
+
+    // Adiciona o objeto pessoa ao array
+    pessoas.push(novaPessoaObj);
+
+    //Salvar no localStorage
+    salvarPessoas();
+    console.log(pessoas);
     form.reset();
+    renderizarPessoas();
+    msg.innerHTML = "Pessoa cadastrada com sucesso! ✅";
+    msg.style.color = "green";
   }
 });
+
+function renderizarPessoas() {
+  const listarPessoas = document.querySelector("#listarPessoas");
+  // listarPessoas.innerHTML = ""; // Limpa a lista antes de renderizar novamente
+  pessoas.forEach((pessoa) => {
+    const row = document.createElement("tr");
+
+    const nomeCell = document.createElement("td");
+    nomeCell.textContent = pessoa.nome;
+    const dataCell = document.createElement("td");
+    dataCell.textContent = pessoa.dataNascimento;
+
+    const actionsCell = document.createElement("td");
+
+    const deleteBtn = document.createElement("span");
+    deleteBtn.textContent = "Deletar";
+    deleteBtn.classList.add("botoes");
+    deleteBtn.classList.add("deletar");
+    deleteBtn.id = "btnEditar";
+
+    const editBtn = document.createElement("span");
+    editBtn.textContent = "Editar";
+    editBtn.classList.add("botoes");
+    editBtn.classList.add("editar");
+    editBtn.id = "btnEditar";
+
+    actionsCell.appendChild(editBtn);
+    actionsCell.appendChild(deleteBtn);
+
+    row.appendChild(nomeCell);
+    row.appendChild(dataCell);
+    row.appendChild(actionsCell);
+
+    listarPessoas.appendChild(row);
+  });
+}
+
+console.log(renderizarPessoas());
+
+function salvarPessoas() {
+  const pessoasString = JSON.stringify(pessoas);
+  localStorage.setItem("pessoas", pessoasString);
+}
