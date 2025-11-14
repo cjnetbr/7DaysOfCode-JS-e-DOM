@@ -86,3 +86,7 @@ td .botoes {
 .deletar:hover {
   color: red;
 }
+
+.editando {
+  background-color: #e0f7fa;
+}
